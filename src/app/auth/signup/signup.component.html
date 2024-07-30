@@ -1,0 +1,58 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Create Your Account</h2>
+    <!-- Hidden inputs to trick autofill -->
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <input type="text" style="display:none">
+      <input type="password" style="display:none">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="name" class="block text-gray-700 font-semibold">Name</label>
+          <input type="text" id="name" formControlName="name" class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="new-name" name="random-name123">
+          <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="text-red-600 text-sm mt-1">
+            Name is required.
+          </div>
+        </div>
+        <div>
+          <label for="username" class="block text-gray-700 font-semibold">Username</label>
+          <input type="text" id="username" formControlName="username" class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="new-username" name="random-username123">
+          <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched" class="text-red-600 text-sm mt-1">
+            Username is required.
+          </div>
+        </div>
+        <div class="col-span-1 md:col-span-2">
+          <label for="mobile" class="block text-gray-700 font-semibold">Mobile</label>
+          <app-phone-input formControlName="mobile" autocomplete="new-mobile" name="random-mobile123"></app-phone-input>
+          <div *ngIf="signupForm.get('mobile')?.invalid && signupForm.get('mobile')?.touched" class="text-red-600 text-sm mt-1">
+            Invalid mobile number.
+          </div>
+        </div>
+        <div class="col-span-1 md:col-span-2">
+          <label for="email" class="block text-gray-700 font-semibold">Email</label>
+          <input type="email" id="email" formControlName="email" class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="new-email" name="random-email123">
+          <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-red-600 text-sm mt-1">
+            Please enter a valid email.
+          </div>
+        </div>
+        <div>
+          <label for="password" class="block text-gray-700 font-semibold">Password</label>
+          <input type="password" id="password" formControlName="password" class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="new-password" name="random-password123">
+          <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-red-600 text-sm mt-1">
+            {{ signupForm.get('password')?.errors?.['strongPassword'] ? 'Password must include uppercase, lowercase, number, and special character.' : 'Password must be at least 6 characters.' }}
+          </div>
+        </div>
+        <div>
+          <label for="confirmPassword" class="block text-gray-700 font-semibold">Confirm Password</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" class="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="new-password" name="random-confirmPassword123">
+          <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="text-red-600 text-sm mt-1">
+            Passwords must match.
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="bg-blue-600 text-white py-3 px-4 rounded w-full mt-6 hover:bg-blue-700 transition duration-300">Sign Up</button>
+    </form>
+    <p class="text-center mt-6 text-gray-700">Already have an account? <a routerLink="/auth/login" class="text-blue-600 hover:underline">Login</a></p>
+  </div>
+</div>

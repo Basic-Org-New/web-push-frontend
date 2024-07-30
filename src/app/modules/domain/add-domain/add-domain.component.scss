@@ -1,0 +1,34 @@
+/* add-domain.component.css */
+
+
+  
+  input, textarea, button {
+    transition: all 0.3s ease;
+  }
+  
+  input:focus, textarea:focus, button:focus {
+    outline: none;
+  }
+  .file-drop-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    min-height: 150px;
+  }
+  .file-drop-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    min-height: 150px;
+  }
+  ngx-dropzone{
+    justify-content: center;
+  }
+  ngx-dropzone-preview{
+    max-width: 100% !important;
+  }

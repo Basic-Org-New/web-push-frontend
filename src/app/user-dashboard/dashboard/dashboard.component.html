@@ -1,0 +1,11 @@
+<div class="md:flex min-h-screen">
+    <app-sidebar [open]="sidebarOpen" (toggleSidebar)="toggleSidebar()"></app-sidebar>
+    <div class="flex-1 flex flex-col">
+      <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
+      <main class="bg-[#f3f3f9] flex-grow">
+     <router-outlet></router-outlet>
+      </main>
+      <app-footer></app-footer>
+    </div>
+  </div>
+  

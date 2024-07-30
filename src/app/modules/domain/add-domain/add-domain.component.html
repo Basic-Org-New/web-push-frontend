@@ -1,0 +1,114 @@
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mt-6 mb-6">
+  <h2 class="text-2xl font-semibold mb-6 text-center">Add Domain Configuration</h2>
+  <form [formGroup]="domainForm" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Domain -->
+      <div class="mb-6">
+        <label for="domain" class="block text-gray-700 font-medium mb-2">Domain</label>
+        <input
+          id="domain"
+          formControlName="domain"
+          type="text"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="example.com"
+        />
+        <div *ngIf="domainForm.get('domain')?.invalid && (domainForm.get('domain')?.dirty || submitted)" class="text-red-600 text-sm mt-1">
+          <div *ngIf="domainForm.get('domain')?.errors?.['required']">Domain is required.</div>
+          <div *ngIf="domainForm.get('domain')?.errors?.['pattern']">Domain should be a valid domain name or IP address.</div>
+        </div>
+        <small class="text-gray-500">Enter the domain without http/https and without www.</small>
+      </div>
+
+      <!-- Firebase Email -->
+      <div class="mb-6">
+        <label for="firebase-email" class="block text-gray-700 font-medium mb-2">Firebase Email</label>
+        <input
+          id="firebase-email"
+          formControlName="firebaseEmail"
+          type="email"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="example@firebase.com"
+        />
+        <div *ngIf="domainForm.get('firebaseEmail')?.invalid && (domainForm.get('firebaseEmail')?.dirty || submitted)" class="text-red-600 text-sm mt-1">
+          <div *ngIf="domainForm.get('firebaseEmail')?.errors?.['required']">Firebase email is required.</div>
+          <div *ngIf="domainForm.get('firebaseEmail')?.errors?.['email']">Invalid email format.</div>
+        </div>
+        <small class="text-gray-500">Enter the Firebase email.</small>
+      </div>
+
+      <!-- Firebase Config -->
+      <div class="mb-6 md:col-span-2">
+        <label for="firebase-config" class="block text-gray-700 font-medium mb-2">Firebase Config</label>
+        <textarea
+          id="firebase-config"
+          formControlName="firebaseConfig"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          rows="4"
+          placeholder="Enter the Firebase config"
+        ></textarea>
+        <div *ngIf="domainForm.get('firebaseConfig')?.invalid && (domainForm.get('firebaseConfig')?.dirty || submitted)" class="text-red-600 text-sm mt-1">
+          <div *ngIf="domainForm.get('firebaseConfig')?.errors?.['required']">Firebase config is required.</div>
+        </div>
+        <small class="text-gray-500">Enter the long text Firebase config.</small>
+      </div>
+
+      <!-- Public Key (VAPID Key) -->
+      <div class="mb-6">
+        <label for="public-key" class="block text-gray-700 font-medium mb-2">Public Key (VAPID Key)</label>
+        <input
+          id="public-key"
+          formControlName="publicKey"
+          type="text"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="Enter the public VAPID key"
+        />
+        <div *ngIf="domainForm.get('publicKey')?.invalid && (domainForm.get('publicKey')?.dirty || submitted)" class="text-red-600 text-sm mt-1">
+          <div *ngIf="domainForm.get('publicKey')?.errors?.['required']">Public VAPID key is required.</div>
+        </div>
+        <small class="text-gray-500">Enter the public VAPID key for push notifications.</small>
+      </div>
+
+      <!-- Private Key (VAPID Key) -->
+      <div class="mb-6">
+        <label for="private-key" class="block text-gray-700 font-medium mb-2">Private Key (VAPID Key)</label>
+        <input
+          id="private-key"
+          formControlName="privateKey"
+          type="text"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="Enter the private VAPID key"
+        />
+        <div *ngIf="domainForm.get('privateKey')?.invalid && (domainForm.get('privateKey')?.dirty || submitted)" class="text-red-600 text-sm mt-1">
+          <div *ngIf="domainForm.get('privateKey')?.errors?.['required']">Private VAPID key is required.</div>
+        </div>
+        <small class="text-gray-500">Enter the private VAPID key for push notifications.</small>
+      </div>
+
+      <!-- Service Account File -->
+      <div class="mb-6 md:col-span-2">
+        <label for="service-account" class="block text-gray-700 font-medium mb-2">Service Account File</label>
+        <ngx-dropzone (change)="onSelect($event)">
+          <ngx-dropzone-label>
+            <p class="text-gray-500">Drag and drop your JSON file here, or click to select the file.</p>
+          </ngx-dropzone-label>
+          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+        <div *ngIf="!file && !isCloneMode && submitted" class="text-red-600 text-sm mt-1">Service account file is required.</div>
+        <small class="text-gray-500">Upload a JSON file (max size 1MB).</small>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-6">
+      <button
+        type="submit"
+        class="w-full px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        [disabled]="domainForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

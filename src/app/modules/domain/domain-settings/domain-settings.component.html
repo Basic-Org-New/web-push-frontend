@@ -1,0 +1,54 @@
+<div class="container mx-auto mt-10 p-4">
+    <mat-vertical-stepper linear>
+      <mat-step *ngFor="let step of steps; let i = index" [completed]="step.completed">
+        <ng-template matStepLabel>{{ step.label }}</ng-template>
+        <div class="prose mt-4 mb-4">
+          <div *ngIf="step.label === 'Step 1: Copy & paste code'">
+            <p>Copy the code below and paste it into the <code>&lt;head&gt;</code> of your page:</p>
+            <div class="code-block p-2 bg-gray-100 rounded">
+              <pre class="whitespace-pre-wrap">
+                <code>&lt;script src="{{ backendUrl }}/domains/push.js?domain={{ domainId }}"&gt;&lt;/script&gt;</code>
+              </pre>
+              <button mat-stroked-button color="primary" (click)="copyCodeToClipboard('<script src=\'{{backendUrl}}/domains/push.js?domain={{domainId}}\'></script>')">Copy</button>
+            </div>
+          </div>
+          <div [innerHTML]="step.content" *ngIf="step.label !== 'Step 1: Copy & paste code'"></div>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious *ngIf="i !== 0">Back</button>
+          <button mat-button matStepperNext *ngIf="i !== steps.length - 1">Next</button>
+          <button mat-button (click)="completeStep(step)" *ngIf="i === steps.length - 1">Complete</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  
+    <div class="table-wrapper overflow-x-auto mt-10">
+      <table class="w-full bg-white border border-gray-200">
+        <thead>
+          <tr class="bg-gray-100 text-left">
+            <th class="py-2 px-4">Status</th>
+            <th class="py-2 px-4">Platform</th>
+            <th class="py-2 px-4">Name</th>
+            <th class="py-2 px-4">Subscription Type</th>
+            <th class="py-2 px-4">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let element of dataSource" class="hover:bg-gray-50">
+            <td class="py-2 px-4">
+              <mat-slide-toggle [(ngModel)]="element.status"></mat-slide-toggle>
+            </td>
+            <td class="py-2 px-4">{{ element.platform }}</td>
+            <td class="py-2 px-4">{{ element.name }}</td>
+            <td class="py-2 px-4">{{ element.subscriptionType }}</td>
+            <td class="py-2 px-4">
+              <button mat-icon-button color="warn" (click)="editElement(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

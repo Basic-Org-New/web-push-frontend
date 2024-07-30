@@ -1,0 +1,38 @@
+<div class="schedule-notification">
+    <h2 class="text-xl font-bold mb-4">Schedule Notification</h2>
+    <form>
+      <!-- Send Notification Now -->
+      <div class="mb-4">
+        <label class="block text-gray-700">Send Notification Now</label>
+        <div class="flex items-center">
+          <input type="radio" id="sendNowYes" name="sendNow" value="yes" [(ngModel)]="sendNow" checked>
+          <label for="sendNowYes" class="ml-2">Yes</label>
+          <input type="radio" id="sendNowNo" name="sendNow" value="no" class="ml-4" [(ngModel)]="sendNow">
+          <label for="sendNowNo" class="ml-2">No</label>
+        </div>
+      </div>
+  
+      <!-- Notification Expires In -->
+      <div class="mb-4">
+        <label class="block text-gray-700">Notification expires in</label>
+        <input type="number" class="form-input mt-1 block w-full" [(ngModel)]="notificationExpires" name="notificationExpires">
+        <select class="form-select mt-1 block w-full" [(ngModel)]="notificationExpiresUnit" name="notificationExpiresUnit">
+          <option value="minutes">Minutes</option>
+          <option value="hours">Hours</option>
+          <option value="days" selected>Days</option>
+        </select>
+      </div>
+  
+      <!-- Sticky Notification -->
+      <div class="mb-4">
+        <label class="block text-gray-700">Sticky Notification</label>
+        <div class="flex items-center">
+          <input type="radio" id="stickyYes" name="stickyNotification" value="yes" [(ngModel)]="stickyNotification" checked>
+          <label for="stickyYes" class="ml-2">Yes</label>
+          <input type="radio" id="stickyNo" name="stickyNotification" value="no" class="ml-4" [(ngModel)]="stickyNotification">
+          <label for="stickyNo" class="ml-2">No</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  

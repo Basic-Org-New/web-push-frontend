@@ -1,0 +1,131 @@
+<div class="md:flex min-h-screen">
+    <app-sidebar [open]="sidebarOpen" (toggleSidebar)="toggleSidebar()"></app-sidebar>
+    <div class="flex-1 flex flex-col">
+      <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
+      <main class="bg-[#f3f3f9] flex-grow">
+        <div class="container mx-auto p-4">
+            <div class="flex flex-wrap -mx-4">
+              <!-- Send Notification Form -->
+              <div class="w-full lg:w-2/3 px-4 mb-8">
+                <div class="send-notification">
+                    <h2 class="text-xl font-bold mb-4">Notification</h2>
+                    <form (ngSubmit)="onSubmit()">
+                      <!-- Audience selection -->
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Audience</label>
+                        <div class="flex items-center">
+                          <input type="radio" id="all" name="audience" value="all" [(ngModel)]="audience" checked>
+                          <label for="all" class="ml-2">All</label>
+                          <input type="radio" id="manual" name="audience" value="manual" class="ml-4" [(ngModel)]="audience">
+                          <label for="manual" class="ml-2">Manual</label>
+                          <input type="radio" id="segmentation" name="audience" value="segmentation" class="ml-4" [(ngModel)]="audience">
+                          <label for="segmentation" class="ml-2">Segmentation</label>
+                        </div>
+                      </div>
+                  
+                      <!-- Domains selection -->
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Domains</label>
+                        <select class="form-select mt-1 block w-full" [(ngModel)]="domain" name="domain">
+                          <option *ngFor="let domain of domains" [value]="domain">{{ domain }}</option>
+                        </select>
+                      </div>
+                  
+                      <!-- Title and Message -->
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Title</label>
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Enter title" [(ngModel)]="title" name="title">
+                      </div>
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Message</label>
+                        <textarea class="form-textarea mt-1 block w-full" placeholder="Enter message" [(ngModel)]="message" name="message"></textarea>
+                      </div>
+                  
+                      <!-- URLs -->
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Icon URL</label>
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Use PNG or JPG Only" [(ngModel)]="iconUrl" name="iconUrl">
+                      </div>
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Image URL</label>
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Use PNG or JPG Only" [(ngModel)]="imageUrl" name="imageUrl">
+                      </div>
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Launch URL</label>
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Enter Launch URL" [(ngModel)]="launchUrl" name="launchUrl">
+                        <div class="flex items-center mt-2">
+                          <input type="checkbox" id="useUtm" [(ngModel)]="useUtm" name="useUtm">
+                          <label for="useUtm" class="ml-2">Use UTM Link</label>
+                        </div>
+                      </div>
+                  
+                      <!-- Advanced Settings -->
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Send Notification Now</label>
+                        <div class="flex items-center">
+                          <input type="radio" id="sendNowYes" name="sendNow" value="yes" [(ngModel)]="sendNow" checked>
+                          <label for="sendNowYes" class="ml-2">Yes</label>
+                          <input type="radio" id="sendNowNo" name="sendNow" value="no" class="ml-4" [(ngModel)]="sendNow">
+                          <label for="sendNowNo" class="ml-2">No</label>
+                        </div>
+                      </div>
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Notification expires in</label>
+                        <input type="number" class="form-input mt-1 block w-full" [(ngModel)]="notificationExpires" name="notificationExpires">
+                        <select class="form-select mt-1 block w-full" [(ngModel)]="notificationExpiresUnit" name="notificationExpiresUnit">
+                          <option value="minutes">Minutes</option>
+                          <option value="hours">Hours</option>
+                          <option value="days" selected>Days</option>
+                        </select>
+                      </div>
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Sticky Notification</label>
+                        <div class="flex items-center">
+                          <input type="radio" id="stickyYes" name="stickyNotification" value="yes" [(ngModel)]="stickyNotification" checked>
+                          <label for="stickyYes" class="ml-2">Yes</label>
+                          <input type="radio" id="stickyNo" name="stickyNotification" value="no" class="ml-4" [(ngModel)]="stickyNotification">
+                          <label for="stickyNo" class="ml-2">No</label>
+                        </div>
+                      </div>
+                  
+                      <!-- Buttons -->
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Button 1</label>
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Button Text" [(ngModel)]="button1.text" name="button1Text">
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Button Icon (Optional if Icon Exists)" [(ngModel)]="button1.icon" name="button1Icon">
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Button Launch URL" [(ngModel)]="button1.url" name="button1Url">
+                      </div>
+                      <div class="mb-4">
+                        <label class="block text-gray-700">Button 2</label>
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Button Text" [(ngModel)]="button2.text" name="button2Text">
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Button Icon (Optional if Icon Exists)" [(ngModel)]="button2.icon" name="button2Icon">
+                        <input type="text" class="form-input mt-1 block w-full" placeholder="Button Launch URL" [(ngModel)]="button2.url" name="button2Url">
+                      </div>
+                  
+                      <div class="flex justify-end space-x-4 mt-6">
+                        <button type="button" class="btn btn-blue">Live Preview</button>
+                        <button type="button" class="btn btn-red">Cancel</button>
+                        <button type="submit" class="btn btn-green">Send</button>
+                      </div>
+                    </form>
+                  </div>
+                        </div>
+              <!-- Notification Preview -->
+              <div class="w-full lg:w-1/3 px-4 mb-8">
+                <app-notification-preview></app-notification-preview>
+              </div>
+              <!-- Schedule Notification -->
+              <div class="w-full px-4">
+                <app-schedule-notification></app-schedule-notification>
+              </div>
+            </div>
+          </div>
+          
+        
+        
+      </main>
+      <app-footer></app-footer>
+    </div>
+  </div>
+  
+

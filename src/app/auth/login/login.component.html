@@ -1,0 +1,26 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="login" class="block text-gray-700">Username or Email</label>
+        <input type="text" id="login" formControlName="login" class="w-full p-2 border border-gray-300 rounded mt-1">
+        <div *ngIf="loginForm.get('login')?.invalid && loginForm.get('login')?.touched" class="text-red-600 text-sm mt-1">
+          Please enter a valid username or email.
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700">Password</label>
+        <input type="password" id="password" formControlName="password" class="w-full p-2 border border-gray-300 rounded mt-1">
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-600 text-sm mt-1">
+          Password must be at least 6 characters.
+        </div>
+      </div>
+      <div class="mb-4 text-right">
+        <a routerLink="/auth/request-reset-password" class="text-blue-600">Forgot Password?</a>
+      </div>
+      <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded w-full">Login</button>
+    </form>
+    <p class="text-center mt-4">Don't have an account? <a routerLink="/auth/signup" class="text-blue-600">Sign Up</a></p>
+  </div>
+</div>

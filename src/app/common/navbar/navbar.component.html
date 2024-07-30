@@ -1,0 +1,61 @@
+<nav class="bg-primary shadow-xl sticky w-full top-0 text-white z-50">
+    <div class="container mx-auto flex items-center justify-between h-16 px-4">
+      <!-- Sidebar Toggle Button -->
+      <div class="flex items-center md:hidden">
+        <button type="button" (click)="toggleSidebarMenu()"
+                class="bg-primary inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-300 focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+  
+      <!-- Search Input and Create New Campaign Button -->
+      <div class="flex items-center flex-grow space-x-4">
+        <div class="relative w-full max-w-lg">
+          <input type="text" placeholder="Enter Blog Post URL for Quick Push"
+                 class="w-full pl-10 pr-4 py-2 rounded-md text-gray-900 focus:outline-none">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+            <i class="fas fa-link"></i>
+          </div>
+        </div>
+        <button class="bg-accent hover:bg-accent-dark text-white py-2 px-4 rounded-md">
+          Create New Campaign
+        </button>
+      </div>
+  
+      <!-- Notification and User Profile -->
+      <div class="flex items-center ml-4">
+        <!-- Notification Icon -->
+        <button class="relative bg-primary hover:text-gray-300 text-white p-2 rounded-full focus:outline-none">
+          <i class="fas fa-bell"></i>
+        </button>
+  
+        <!-- User Profile Dropdown -->
+        <div class="relative ml-4">
+          <button class="flex items-center bg-primary hover:text-gray-300 text-white focus:outline-none"
+                  (click)="toggleProfileMenu()">
+            <img class="h-8 w-8 rounded-full"
+                 src="https://assets.codepen.io/3321250/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1646800353&width=512"
+                 alt="User avatar">
+            <span class="ml-2">AMAR KUMAR</span>
+            <i class="ml-1 fas fa-chevron-down"></i>
+          </button>
+          <div *ngIf="profileMenuOpen"
+               class="origin-top-right absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center space-x-2">
+              <i class="fas fa-user"></i><span>Profile</span>
+            </a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center space-x-2">
+              <i class="fas fa-cog"></i><span>Settings</span>
+            </a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center space-x-2">
+              <i class="fas fa-server"></i><span>Server Status</span>
+            </a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center space-x-2">
+              <i class="fas fa-sign-out-alt"></i><span>Log out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  

@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'node_modules/ngx-toastr/toastr.css';
+@import 'animate.css/animate.css';
+@import 'aos/dist/aos.css';
+
+/* Custom styles */
+.toast-top-right {
+  @apply fixed top-0 right-0 mt-4 mr-4;
+}
+
+.toast-success {
+  @apply bg-green-500 text-white;
+}
+
+.toast-error {
+  @apply bg-red-500 text-white;
+}
+
+.toast-info {
+  @apply bg-blue-500 text-white;
+}
+
+.toast-warning {
+  @apply bg-yellow-500 text-white;
+}
+
+.container {
+  @apply max-w-6xl mx-auto;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-md;
+}
+
+.btn-blue {
+  @apply bg-blue-500 hover:bg-blue-600 text-white;
+}
+
+.btn-red {
+  @apply bg-red-500 hover:bg-red-600 text-white;
+}
+
+.btn-green {
+  @apply bg-green-500 hover:bg-green-600 text-white;
+}
+
+.form-input {
+  @apply block w-full mt-1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #fff;
+}
+
+.form-select {
+  @apply block w-full mt-1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #fff;
+}
+
+.form-textarea {
+  @apply block w-full mt-1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: #fff;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
